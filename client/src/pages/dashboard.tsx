@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocation } from 'wouter'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -24,10 +25,11 @@ import logoImage from '@assets/logo_1757250363416.jpg'
 export default function Dashboard() {
   const { user, signOut } = useAuth()
   const [timeRange, setTimeRange] = useState('7d')
+  const [, navigate] = useLocation()
 
   const handleLogout = async () => {
     await signOut()
-    window.location.href = '/'
+    navigate('/')
   }
 
   const getUserDisplayName = () => {

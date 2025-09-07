@@ -1,4 +1,5 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
+import { useLocation } from 'wouter'
 import { useAuth } from '@/hooks/useAuth'
 
 interface ProtectedRouteProps {
@@ -7,6 +8,13 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth()
+  const [, navigate] = useLocation()
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/')
+    }
+  }, [user, loading, navigate])
 
   if (loading) {
     return (
@@ -20,9 +28,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   }
 
   if (!user) {
-    // Redirect to landing page if not authenticated
-    window.location.href = '/'
-    return null
+    return null // Will redirect via useEffect
   }
 
   return <>{children}</>

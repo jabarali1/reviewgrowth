@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'wouter'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import AuthModal from '@/components/AuthModal'
@@ -10,6 +11,7 @@ export default function Landing() {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [authMode, setAuthMode] = useState<'login' | 'signup' | 'forgot'>('login')
   const { user } = useAuth()
+  const [, navigate] = useLocation()
 
   const openAuthModal = (mode: 'login' | 'signup' | 'forgot') => {
     setAuthMode(mode)
@@ -17,10 +19,11 @@ export default function Landing() {
   }
 
   // Redirect to dashboard if already authenticated
-  if (user) {
-    window.location.href = '/dashboard'
-    return null
-  }
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard')
+    }
+  }, [user, navigate])
 
   return (
     <div className="min-h-screen relative hero-pattern">
