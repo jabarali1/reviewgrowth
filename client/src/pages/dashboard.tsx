@@ -19,6 +19,7 @@ import {
   DollarSign,
   BarChart
 } from 'lucide-react'
+import logoImage from '@assets/logo_1757250363416.jpg'
 
 export default function Dashboard() {
   const { user, signOut } = useAuth()
@@ -124,8 +125,8 @@ export default function Dashboard() {
       <nav className="bg-card border-b border-border px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-3" data-testid="dashboard-logo">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <BarChart3 className="text-white text-sm" />
+            <div className="w-8 h-8 rounded-lg overflow-hidden">
+              <img src={logoImage} alt="ChartFlow Logo" className="w-full h-full object-cover" />
             </div>
             <span className="text-lg font-bold text-foreground">ChartFlow</span>
           </div>

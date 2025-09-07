@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import AuthModal from '@/components/AuthModal'
 import { useAuth } from '@/hooks/useAuth'
 import { BarChart3, Rocket, Zap, Shield, Puzzle } from 'lucide-react'
+import logoImage from '@assets/logo_1757250363416.jpg'
 
 export default function Landing() {
   const [authModalOpen, setAuthModalOpen] = useState(false)
@@ -27,8 +28,8 @@ export default function Landing() {
       <nav className="absolute top-0 w-full z-50 px-6 py-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-3" data-testid="logo">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <BarChart3 className="text-white text-lg" />
+            <div className="w-10 h-10 rounded-lg overflow-hidden">
+              <img src={logoImage} alt="ChartFlow Logo" className="w-full h-full object-cover" />
             </div>
             <span className="text-xl font-bold text-foreground">ChartFlow</span>
           </div>
