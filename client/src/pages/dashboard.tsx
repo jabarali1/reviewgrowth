@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { useLocation } from 'wouter'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { 
-  BarChart3, 
   Users, 
   TrendingUp, 
   MousePointer, 
@@ -13,24 +11,14 @@ import {
   Plus,
   Download,
   Settings,
-  Bell,
-  LogOut,
-  User,
   UserPlus,
   DollarSign,
   BarChart
 } from 'lucide-react'
-import logoImage from '@assets/logo_1757250363416.jpg'
 
 export default function Dashboard() {
-  const { user, signOut } = useAuth()
+  const { user } = useAuth()
   const [timeRange, setTimeRange] = useState('7d')
-  const [, navigate] = useLocation()
-
-  const handleLogout = async () => {
-    await signOut()
-    navigate('/')
-  }
 
   const getUserDisplayName = () => {
     return user?.user_metadata?.full_name || 
@@ -122,59 +110,7 @@ export default function Dashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-muted/30">
-      {/* Dashboard Navigation */}
-      <nav className="bg-card border-b border-border px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-3" data-testid="dashboard-logo">
-            <div className="w-8 h-8 rounded-lg overflow-hidden">
-              <img src={logoImage} alt="ChartFlow Logo" className="w-full h-full object-cover" />
-            </div>
-            <span className="text-lg font-bold text-foreground">ChartFlow</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:flex items-center space-x-6">
-              <a href="#" className="text-foreground hover:text-primary transition-colors">
-                Dashboard
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                Analytics
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                Reports
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                Settings
-              </a>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground" data-testid="button-notifications">
-                <Bell className="h-4 w-4" />
-              </Button>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                  <User className="text-white text-sm" />
-                </div>
-                <span className="text-sm font-medium" data-testid="text-username">
-                  {getUserDisplayName()}
-                </span>
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleLogout}
-                className="text-muted-foreground hover:text-destructive transition-colors"
-                data-testid="button-logout"
-              >
-                <LogOut className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Dashboard Content */}
-      <div className="max-w-7xl mx-auto p-6">
+    <div className="p-6">
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2" data-testid="welcome-message">
